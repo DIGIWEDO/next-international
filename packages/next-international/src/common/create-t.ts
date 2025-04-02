@@ -31,7 +31,7 @@ export function createT<Locale extends BaseLocale, Scope extends Scopes<Locale> 
 
   const pluralRules = new Intl.PluralRules(context.locale);
 
-  function getPluralKey(count: number) {
+  function getPluralKey(count: number = 0) {
     if (count === 0) return 'zero';
     return pluralRules.select(count);
   }

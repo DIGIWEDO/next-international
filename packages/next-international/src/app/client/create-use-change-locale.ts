@@ -30,7 +30,7 @@ export function createUseChangeLocale<LocalesKeys>(
       pathWithoutLocale = '/';
     }
 
-    return function changeLocale(newLocale: LocalesKeys) {
+    return function changeLocale(newLocale: LocalesKeys, newPath: string) {
       if (newLocale === currentLocale) return;
 
       const importFnLocale = locales[newLocale as keyof typeof locales];
@@ -43,7 +43,7 @@ export function createUseChangeLocale<LocalesKeys>(
       importFnLocale().then(module => {
         localesCache.set(newLocale as string, module.default);
 
-        push(`/${newLocale}${pathWithoutLocale}${finalSearchParams}`);
+        push(`${newPath}${finalSearchParams}`);
         refresh();
       });
     };
